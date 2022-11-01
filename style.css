@@ -1,0 +1,46 @@
+button{
+    margin: auto;
+    height: 30px;
+    width: 30px;
+}
+
+.calcbody {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 2px;
+    background-color: gray;
+    height: 500px;
+    width: 400px;
+}
+
+.disp {
+    background-color: white;
+    margin: 20px;
+    grid-area: 1 / 1 / span 1 / span 4 ;
+}
+
+.button {
+    text-align: center;
+    border: 2px solid white;
+}
+
+.buttonplus {
+    grid-area: 2 / 4 / span 1 / span 1;
+}
+
+.buttonminus {
+    grid-area: 3 / 4 / span 1 / span 1;
+}
+
+.buttonmult {
+    grid-area: 4 / 4 / span 1 / span 1;
+}
+
+.buttondiv {
+    grid-area: 5 / 4 / span 1 / span 1;
+}
+
+.buttonenter {
+    grid-area: 6 / 4 / span 1 / span 1;
+}
