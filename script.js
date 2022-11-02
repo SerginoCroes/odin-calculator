@@ -25,39 +25,78 @@ function operate(a, b, f){
         case '*':
             return mult(a, b);
         case '/':            
-            return b != 0 ? mult(a, 1/b) : 'ken nie';
+            return b != 0 ? mult(a, 1/b) : 'ken nie';        
         default:
-            return 0;
+            return b;
     }
 }
 
 function buttonPress(button){
-    let numButt = Number(button.target.innerText);
-
+    let opButt = button.target.innerText;
+    let numButt = Number(opButt);
     if (!isNaN(numButt)){
-        //console.log(numButt);
-        dispString += numButt.toString(); 
-        operandCurrent = Number(dispString);
-        display.innerText = operandCurrent;
-
-    } else if(numButt != 'clr'){
-        let result = operate(operandPast, operandCurrent, operation);
-        
-        console.log(operandPast, operandCurrent);
-        console.log(operation);
-        console.log(result);
-
-        dispString = result.toString();
-        operation = button.target.innerText;
-
-        operandPast = operandCurrent;
-        operandCurrent = result;
-
-        display.innerText = dispString;
+        addDigit(numButt);
+    } else if (opButt === '.'){
+        if (operandCurrent - Math.floor(operandCurrent) === 0){
+            console.log(dispString);
+            addDigit(opButt);
+        }        
     } else {
+        opPress(opButt);
+    }
+}
+
+function addDigit(num){
+    if (operation === '=') {
+        dispString = '';
         operation = '';
-        result = 0;
-        operandCurrent = 0;
+    }
+    if (dispString.length < 12){
+        dispString += num.toString();    
+        operandCurrent = Number(dispString);
+        display.innerText = dispString;
+    }
+}
+
+function opPress(button){
+    if (button === 'clr'){
+
+        operation = '';
+        dispString = '';
         operandPast = 0;
+        operandCurrent = 0;
+        display.innerText = operandCurrent;
+        console.clear();
+
+    } else if (button === '='){     
+
+        console.log('calculate');
+        console.log(operandPast, operandCurrent, operation);        
+
+        operandCurrent = operate(operandPast, operandCurrent, operation);
+        display.innerText = operandCurrent;
+        operation = '=';
+
+        console.log('calculated');
+        console.log(operandPast, operandCurrent, operation);
+        console.log('');
+
+    } else {
+
+        console.log('operate');
+        console.log(operandPast, operandCurrent, operation);
+
+        if (operation != '='){
+            operandCurrent = operate(operandPast, operandCurrent, operation);
+            display.innerText = operandCurrent;
+        }
+        operandPast = operandCurrent;
+        dispString = '';
+        operandCurrent = 0;
+        operation = button;
+
+        console.log('operated');
+        console.log(operandPast, operandCurrent, operation);
+        console.log('');
     }
 }
