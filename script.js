@@ -74,6 +74,8 @@ function opPress(button){
         console.log(operandPast, operandCurrent, operation);        
 
         operandCurrent = operate(operandPast, operandCurrent, operation);
+        operandCurrent.toPrecision(operandCurrent.toString().length <= 12 ? operandCurrent.toString().length-1 : 12);
+
         display.innerText = operandCurrent;
         operation = '=';
 
@@ -88,6 +90,7 @@ function opPress(button){
 
         if (operation != '='){
             operandCurrent = operate(operandPast, operandCurrent, operation);
+            operandCurrent.toPrecision(operandCurrent.toString().length <= 12 ? operandCurrent.toString().length-1 : 12);
             display.innerText = operandCurrent;
         }
         operandPast = operandCurrent;
@@ -100,3 +103,5 @@ function opPress(button){
         console.log('');
     }
 }
+
+//  x.toPrecision(x.toString().length <= 12 ? x.toString().length-1 : 12);  
